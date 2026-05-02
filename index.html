@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Maryann</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="WhiteKeys.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+    <div class="envelope-container">
+        <img src="https://media.giphy.com/media/CfYHj2FKAG1pM6dBOz/giphy.gif" alt="Walking Envelope" class="walking-envelope">
+        <p class="instruction-text">Morning beautiful, click the envelope😁</p>
+    </div>
+    <div id="reveal-overlay" class="overlay">
+        <canvas id="birthday-canvas"></canvas>
+        <div id="countdown" class="big-text"></div>
+        <div id="birthday-text" class="big-text"></div>
+        <button id="final-button" class="cute-button" style="display: none;">click me</button>
+        <!-- Add this inside your reveal-overlay div, below the final-button -->
+        <div id="birthday-letter" class="letter-box" style="display: none;">
+            <div class="letter-content">
+                <p>To Maryann,</p>
+                <p>Damn, isn't 21 a big number😂...</p>
+                <p>My main aim of creating all this is to make you feel special, cos you are special. You are one of the greatest person I know, and a lot of people take that for granted (sadly myself included, and I am so sorry for that). I promise to always do better, don't worry i got you 😉😂.</p>
+                <p>Happiest Birthday To YOU🥳🥳, you are AMAZING no scratch that😂 you are INCREDIBLE🤩🤗. Keep Aging like fine wine😘.</p>
+                <p>Know you are LOVED💕 and CHERISHED by me deeply😊. Cant wait to see what this new Chapter has in store for you.</p>
+                <p>YOU ARE THE STAR IN ANY ROOM THAT YOU STAND IN🤗 So keep shining. And Happy Birthday❤️</p>
+        
+                <button id="last-surprise-btn" class="cute-button">click me</button>
+            </div>
+        </div>
+    </div>
+    <div id="final-gallery" class="gallery-container" style="display: none;">
+    <!-- Crucial Middle Photo -->
+        <img src="queen.jpeg" class="photo main-photo" alt="Us">
+
+    <!-- Scattered Photos -->
+        <div class="scattered-group">
+            <img src="zenKitchen.jpeg" class="photo scattered p1" alt="Memory 1">
+            <img src="Artsy.jpeg" class="photo scattered p2" alt="Memory 2">
+            <img src="flowery.jpeg" class="photo scattered p3" alt="Memory 3">
+            <img src="vacation.jpeg" class="photo scattered p4" alt="Memory 4">
+            <img src="cutebracelets.jpeg" class="photo scattered p5" alt="Memory 5">
+
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+
+</html>
