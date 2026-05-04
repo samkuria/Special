@@ -6,7 +6,7 @@ const finalBtn = document.getElementById('final-button');
 const letterBox = document.getElementById('birthday-letter');
 const lastBtn = document.getElementById('last-surprise-btn');
 const finalGallery = document.getElementById('final-gallery');
-const music = document.getElementById('bg-music'); // Added this!
+const music = document.getElementById('bg-music');
 
 const words = ["HAPPY", "BIRTHDAY", "TO", "YOU", "MARYANN"];
 
@@ -89,9 +89,7 @@ function startBirthdayRain() {
 
 // --- 1. Envelope Click ---
 envelope.addEventListener('click', async () => {
-    // Call the fade function which handles the play() call
     fadeInMusic(music);
-
     overlay.style.display = 'flex';
     startBirthdayRain();
 
@@ -110,7 +108,7 @@ envelope.addEventListener('click', async () => {
     finalBtn.style.display = "block";
 });
 
-// --- 2. "Click Me" Button ---
+// --- 2. "Click Me" Button (Reveal Letter) ---
 finalBtn.addEventListener('click', () => {
     textEl.style.display = 'none';
     finalBtn.style.display = 'none';
@@ -118,11 +116,26 @@ finalBtn.addEventListener('click', () => {
     letterBox.style.animation = 'fadeIn 1s ease-in';
 });
 
-// --- 3. Last "Click Me" Button ---
+// --- 3. Last "Click Me" Button (Final Gallery) ---
 lastBtn.addEventListener('click', () => {
+    // Scroll to the top so she starts at the main photo
     window.scrollTo(0, 0);
+    
+    // Hide the countdown/letter overlay
     overlay.style.display = 'none';
-    finalGallery.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    
+    // Show the gallery
+    finalGallery.style.display = 'block';
+
+    // Mobile-specific layout check
+    if (window.innerWidth <= 768) {
+        // Allow her to scroll through the scrapbook stack on her phone
+        document.body.style.overflow = 'auto';
+        finalGallery.style.display = 'block'; // Block layout for stacking
+    } else {
+        // Keep it fixed and centered for desktop
+        document.body.style.overflow = 'hidden';
+        finalGallery.style.display = 'flex'; // Flex for desktop centering
+    }
 });
 
