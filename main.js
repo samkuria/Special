@@ -10,12 +10,17 @@ const music = document.getElementById('bg-music');
 
 const words = ["HAPPY", "BIRTHDAY", "TO", "YOU", "MARYANN"];
 
+// SAFETY FIX: Force everything hidden on page load
+window.addEventListener('DOMContentLoaded', () => {
+    overlay.style.display = 'none';
+    finalGallery.style.display = 'none';
+    letterBox.style.display = 'none';
+});
+
 // --- Music Logic ---
 function fadeInMusic(audioElement) {
     audioElement.volume = 0;
-    audioElement.play().catch(error => {
-        console.log("Autoplay prevented: ", error);
-    });
+    audioElement.play().catch(error => console.log("Autoplay blocked"));
     
     let vol = 0;
     const interval = setInterval(() => {
@@ -45,10 +50,7 @@ function startBirthdayRain() {
     const strings = ['HAPPY BIRTHDAY', '🎂', '💖', 'MARYANN', '✨', '🎈'];
 
     class Particle {
-        constructor() {
-            this.init();
-        }
-
+        constructor() { this.init(); }
         init() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height - canvas.height;
@@ -57,31 +59,22 @@ function startBirthdayRain() {
             this.fontSize = Math.random() * 15 + 12;
             this.speed = Math.random() * 2 + 1.5; 
         }
-
         draw() {
             ctx.fillStyle = this.color;
             ctx.font = `${this.fontSize}px 'Indie Flower'`;
             ctx.fillText(this.text, this.x, this.y);
         }
-
         update() {
             this.y += this.speed;
-            if (this.y > canvas.height) {
-                this.init(); 
-            }
+            if (this.y > canvas.height) this.init(); 
         }
     }
 
-    for (let i = 0; i < 80; i++) {
-        particles.push(new Particle());
-    }
+    for (let i = 0; i < 80; i++) particles.push(new Particle());
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
+        particles.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
     animate();
@@ -103,8 +96,6 @@ envelope.addEventListener('click', async () => {
         textEl.innerText = word;
         await new Promise(r => setTimeout(r, 900)); 
     }
-
-    textEl.style.marginBottom = "20px";
     finalBtn.style.display = "block";
 });
 
@@ -113,29 +104,19 @@ finalBtn.addEventListener('click', () => {
     textEl.style.display = 'none';
     finalBtn.style.display = 'none';
     letterBox.style.display = 'block';
-    letterBox.style.animation = 'fadeIn 1s ease-in';
 });
 
 // --- 3. Last "Click Me" Button (Final Gallery) ---
 lastBtn.addEventListener('click', () => {
-    // Scroll to the top so she starts at the main photo
     window.scrollTo(0, 0);
-    
-    // Hide the countdown/letter overlay
     overlay.style.display = 'none';
-    
-    // Show the gallery
-    finalGallery.style.display = 'block';
 
-    // Mobile-specific layout check
     if (window.innerWidth <= 768) {
-        // Allow her to scroll through the scrapbook stack on her phone
+        finalGallery.style.display = 'block'; // Mobile Stack
         document.body.style.overflow = 'auto';
-        finalGallery.style.display = 'block'; // Block layout for stacking
     } else {
-        // Keep it fixed and centered for desktop
+        finalGallery.style.display = 'flex'; // Desktop Center
         document.body.style.overflow = 'hidden';
-        finalGallery.style.display = 'flex'; // Flex for desktop centering
     }
 });
 
