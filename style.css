@@ -1,53 +1,45 @@
-body{
+body {
     background-image: url('cutepink.jpg');
     background-repeat: repeat;
     background-size: 300px;
     background-attachment: fixed;
     background-color: #fce4ec;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    align-items: centre;
+    align-items: center; /* Fixed spelling from 'centre' */
     min-height: 100vh;
     margin: 0;
     font-family: 'Arial', sans-serif;
-}
-.envelope-container {
-    height: 100vh; /* Takes up the full height of the screen */
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center;     /* Centers vertically */
-}
-
-.walking-envelope {
-    width: 250px; /* You can adjust this to make it bigger or smaller */
-    height: auto;
-    cursor: pointer;
-    /* Adding a soft shadow to give it depth on top of the heart background */
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-    transition: transform 0.3s ease;
-}
-
-/* Make it grow slightly when you hover over it */
-.walking-envelope:hover {
-    transform: scale(1.1);
 }
 
 .envelope-container {
     height: 100vh;
     display: flex;
-    flex-direction: column; /* Stack vertically */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Space between envelope and text */
+    gap: 20px;
+}
+
+.walking-envelope {
+    width: 250px;
+    height: auto;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+.walking-envelope:hover {
+    transform: scale(1.1);
 }
 
 .instruction-text {
-    font-family: 'Indie Flower', cursive; /* Our "not so neat" cute font */
+    font-family: 'Indie Flower', cursive;
     font-size: 1.8rem;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8); /* Makes it pop against the hearts */
+    color: #ff69b4;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
     margin: 0;
     cursor: default;
-    /* Optional: a tiny bit of animation to make the text "pulse" */
     animation: pulse 2s infinite ease-in-out;
 }
 
@@ -55,14 +47,15 @@ body{
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
+
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: white; /* Changed from black to white as requested */
-    display: none; /* Hidden until envelope is clicked */
+    background-color: white;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -72,7 +65,7 @@ body{
 .big-text {
     font-family: 'Indie Flower', cursive;
     font-size: 5rem;
-    color: #ff69b4; /* Hot Pink */
+    color: #ff69b4;
     text-align: center;
 }
 
@@ -93,14 +86,16 @@ body{
 .cute-button:hover {
     transform: scale(1.1);
 }
+
 #birthday-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Puts it behind the countdown and birthday words */
+    z-index: -1;
 }
+
 .letter-box {
     position: absolute;
     top: 50%;
@@ -129,6 +124,8 @@ body{
 .letter-content p {
     margin-bottom: 15px;
 }
+
+/* --- Gallery Styles --- */
 .gallery-container {
     position: fixed;
     top: 0;
@@ -136,7 +133,7 @@ body{
     width: 100%;
     height: 100%;
     z-index: 2000;
-    background-image: url('cutepink.jpg'); /* Bringing back the hearts! */
+    background-image: url('cutepink.jpg');
     background-repeat: repeat;
     background-size: 250px;
     display: flex;
@@ -144,11 +141,32 @@ body{
     align-items: center;
 }
 
-.photo {
+.main-photo {
+    width: 320px;
+    height: auto;
+    border: 8px solid #ff69b4;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+    z-index: 9999;
+    flex-shrink: 0;
+}
+
+.scattered-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.photo.scattered {
     position: absolute;
     border: 5px solid white;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     border-radius: 10px;
+    pointer-events: auto;
+    z-index: 10;
     transition: transform 0.3s;
 }
 
@@ -157,65 +175,61 @@ body{
     z-index: 2100;
 }
 
-.main-photo {
-    /* No positioning needed because the parent is a Flexbox */
-    width: 320px;
-    height: auto;
-    border: 8px solid #ff69b4;
-    border-radius: 15px;
-    box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
-    z-index: 9999;
-    
-    /* Prevents any weird layout shifts */
-    flex-shrink: 0;
+/* Desktop Scattering */
+@media (min-width: 769px) {
+    .p1 { width: 150px; top: 10%; left: 10%; transform: rotate(-10deg); }
+    .p2 { width: 140px; top: 15%; right: 15%; transform: rotate(15deg); }
+    .p3 { width: 160px; bottom: 15%; left: 15%; transform: rotate(5deg); }
+    .p4 { width: 130px; bottom: 10%; right: 10%; transform: rotate(-15deg); }
+    .p5 { width: 150px; top: 40%; right: 5%; transform: rotate(-5deg); }
 }
 
-.scattered-group {
-    /* This container holds the background photos without affecting the center one */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* So she can still click the center if needed */
-}
-
-.photo.scattered {
-    position: absolute;
-    pointer-events: auto; /* Re-enable clicking for the small photos */
-    z-index: 10;
-}
-
-/* Scattering the rest */
-.p1 { width: 150px; top: 10%; left: 10%; transform: rotate(-10deg); }
-.p2 { width: 140px; top: 15%; right: 15%; transform: rotate(15deg); }
-.p3 { width: 160px; bottom: 15%; left: 15%; transform: rotate(5deg); }
-.p4 { width: 130px; bottom: 10%; right: 10%; transform: rotate(-15deg); }
-.p5 { width: 150px; top: 40%; right: 5%; transform: rotate(-5deg); }
-
-
-
-
-/* Tablet and Mobile adjustments */
+/* Mobile & Tablet Fixes */
 @media (max-width: 768px) {
+    body {
+        background-size: 150px;
+    }
+
     .walking-envelope {
-        width: 180px; /* Smaller envelope for smaller screens */
+        width: 180px;
     }
 
     .instruction-text {
-        font-size: 1.4rem; /* Slightly smaller text */
-        padding: 0 20px; /* Prevents text from hitting the screen edges */
-        text-align: center;
-    }
-}
-
-/* Very small mobile devices */
-@media (max-width: 480px) {
-    .walking-envelope {
-        width: 150px;
+        font-size: 1.4rem;
+        padding: 0 20px;
     }
 
-    .instruction-text {
-        font-size: 1.2rem;
+    /* Gallery Mobile Overrides */
+    .gallery-container {
+        display: block !important;
+        overflow-y: auto !important;
+        padding-bottom: 50px;
+    }
+
+    .main-photo {
+        position: relative !important;
+        margin: 40px auto 20px auto !important;
+        width: 80%;
+    }
+
+    .scattered-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        pointer-events: auto;
+    }
+
+    .photo.scattered {
+        position: relative !important;
+        width: 75% !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: rotate(3deg) !important;
+    }
+
+    .photo.scattered:nth-child(even) {
+        transform: rotate(-3deg) !important;
     }
 }
